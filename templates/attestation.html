@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Attestation</title>
+</head>
+<body>
+	<h1>Attestation</h1>
+	<p>Nous soussignons que:</p>
+	<ul>
+		<li><strong>CIN:</strong> {{ attestation.cin }}</li>
+		<li><strong>CNE:</strong> {{ attestation.cne }}</li>
+		<li><strong>Nom:</strong> {{ attestation.nom }}</li>
+		<li><strong>Prénom:</strong> {{ attestation.prenom }}</li>
+		<li><strong>Date de naissance:</strong> {{ attestation.date_naissance }}</li>
+		<li><strong>Lieu de naissance:</strong> {{ attestation.lieu_naissance }}</li>
+		<li><strong>Filière:</strong> {{ attestation.filier }}</li>
+	</ul>
+	<p>a suivi les modules suivants:</p>
+	<ul>
+	{% for module in modules %}
+		<li>{{ module.module }} - Note: {{ module.note }}</li>
+	{% endfor %}
+	</ul>
+	<p>Date de délivrance: {{ date }}</p>
+</body>
+</html>
