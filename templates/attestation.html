@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+			
 	<title>Attestation</title>
 </head>
 <body>
-	<h1>Attestation</h1>
-	<p>Nous soussignons que:</p>
+	<img src="media/fsdmlogo.png" >
+	<h3>Faculté des Sciences Dhar El Mahraz</h3>
+	<h1>RECU DE REINSCRIPTION</h1>
+	<h5>Annéé Universitaire : 2022/2023</h5>
+	<p>le <B>doyen de la Faculté des Sciences Dhar El Mahraz </B>atteste que l'étudiant(e):</p>
 	<ul>
-		<li><strong>CIN:</strong> {{ profile.cin }}</li>
-		<li><strong>CNE:</strong> {{ profile.cne }}</li>
-		<li><strong>Nom:</strong> {{ profile.nom }}</li>
-		<li><strong>Prénom:</strong> {{ profile.prenom }}</li>
-		<li><strong>Date de naissance:</strong> {{ profile.date_naissance }}</li>
-		<li><strong>Lieu de naissance:</strong> {{ profile.lieu_naissance }}</li>
-		<li><strong>Filière:</strong> {{ profile.filier }}</li>
-	</ul>
-	<p>a suivi les modules suivants:</p>
-	<ul>
-	{% for module in modules %}
-		<li>{{ module.module }} - Note: {{ module.note }}</li>
-	{% endfor %}
-	</ul>
+		<li><strong>Nom et Prénom : </strong> {{ profile.nom }} {{ profile.prenom }}</li>
+		<li><strong>Num. Massar : </strong> {{ profile.cne }}</li>		
+		<li><strong>C.I.N : </strong> {{ profile.cin }}</li>
+		<li><strong>Né(e) le </strong>{{ profile.date_naissance }} à {{ profile.lieu_naissance }}</li>
+		<li><strong>est inscrit(e) à la filière:</strong> {{ profile.filier }}</li>
+	
 	<p>Date de délivrance: {{ date }}</p>
+	<p>Cachet</p>
+	<img src="media/cachet.png" width="50" height="60">
 </body>
 </html>
