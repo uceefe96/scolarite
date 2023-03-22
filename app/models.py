@@ -13,7 +13,6 @@ class Filiere(models.Model):
         return self.filier
 
 
-
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # id_user = models.IntegerField()
