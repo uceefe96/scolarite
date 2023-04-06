@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+			
+	<title>Attestation scolarité</title>
+</head>
+<body>
+	<center>
+		<img src="media/fsdmlogo.png" >
+		<h1><B>Faculté des Sciences Dhar El Mahraz</B></h1>
+		</br>
+		</br>
+		<h1><strong><B>ATTESTATION DES SCOLARITE</B></strong></h1>
+	</center>
+	</br>
+</br>
+</br>
+		<p>le doyen de la <B>Faculté des Sciences Dhar El Mahraz </B></p></br>
+		<p>atteste que l'étudiant(e): {{ profile.nom }} {{ profile.prenom }}</p></br>
+		<p><strong>Né(e) le </strong>{{ profile.datenaissance }} à {{ profile.lieunaissance }}</p></br>
+		<p>CNE :              {{ profile.cne }}              C.I.N :   {{ profile.cin }} </p></br>
+		<p>est inscrit(e) pour la session universitaire :                   Printemps 2022/2023</p></br>
+		<p>Filière:</strong> {{ profile.filiere }}</p></br>
+		<p>Modules suivis : </p></br>
+		<ul>
+			{% for p in profile %}
+				<h2>{{ Modules }}</h2>
+			{% endfor %}
+		</ul>
+		
+		  
+
+																					</br>
+																				</br>
+																			</br>
+																		</br>
+																	</br>
+																</br>
+															</br>
+														</br>
+													</br>
+		<p>En foi de quoi, la présente attestation est délivrée à l'intéressé (e) pour servir et valoir ce que de droit</p>	
+		
+		
+
+
+
+
+		<center><p>Fait le: {{ date }}</p>
+		<p>Cachet</p>
+		<img src="media/cachet1.png" width="60" height="60"></center>
+</body>
+</html>

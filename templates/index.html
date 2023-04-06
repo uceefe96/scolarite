@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
     <title>Home</title>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
@@ -23,29 +22,13 @@
 
             <header>
                 <div class="header_inner">
-                    <form action="/search" method="POST">
-                    {% csrf_token %}
-                    <div class="left-side">
-                        <!-- Logo -->
-                        <div id="logo" class=" uk-hidden@s">
-                            <a href="home.html">
-                                <b><h1 style="text-transform: uppercase;"></h1></b>
-                            </a>
-                        </div>
-
-                    </div>
-                    </form>
                     <div class="right-side lg:pr-4">
-                         <!-- upload -->
-                        
-                         <!-- upload dropdown box -->
-                        
-
                         <a href="#">
                             <img src="{{user_profile.profileimg.url}}" class="header-avatar" alt="">
                         </a>
                         <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                             <ul>
+                                <li><a href="/settings"> Profile </a> </li>
                                 <li><a href="logout"> Log Out</a></li>
                             </ul>
                         </div>
@@ -56,17 +39,6 @@
 
             <div class="container m-auto">
 
-                
-                
-    
-                           
-                            
-    
-                     
-    
-        
-
-
                     </div>
 
                     <!-- right sidebar-->
@@ -76,6 +48,10 @@
 
                             <div class="bg-gray-50  border-b border-gray-100 flex items-baseline justify-between py-4 px-6 ">
                                 <h2 class="font-semibold text-lg" ><a href={% url 'rendertopdf' %}>ATTESTATIONS</a></h2>
+                                <!-- <a href="#"> Refresh</a> --> 
+                            </div>
+                            <div class="bg-gray-50  border-b border-gray-100 flex items-baseline justify-between py-4 px-6 ">
+                                <h2 class="font-semibold text-lg" ><a href={% url 'rendertopdf1' %}>ATTESTATIONS SCOLARITE</a></h2>
                                 <!-- <a href="#"> Refresh</a> --> 
                             </div>
                            

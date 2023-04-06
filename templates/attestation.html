@@ -5,20 +5,37 @@
 	<title>Attestation</title>
 </head>
 <body>
-	<img src="media/fsdmlogo.png" >
-	<h3>Faculté des Sciences Dhar El Mahraz</h3>
-	<h1>RECU DE REINSCRIPTION</h1>
-	<h5>Annéé Universitaire : 2022/2023</h5>
-	<p>le <B>doyen de la Faculté des Sciences Dhar El Mahraz </B>atteste que l'étudiant(e):</p>
-	<ul>
-		<li><strong>Nom et Prénom : </strong> {{ profile.nom }} {{ profile.prenom }}</li>
-		<li><strong>Num. Massar : </strong> {{ profile.cne }}</li>		
-		<li><strong>C.I.N : </strong> {{ profile.cin }}</li>
-		<li><strong>Né(e) le </strong>{{ profile.date_naissance }} à {{ profile.lieu_naissance }}</li>
-		<li><strong>est inscrit(e) à la filière:</strong> {{ profile.filier }}</li>
-	
-	<p>Date de délivrance: {{ date }}</p>
-	<p>Cachet</p>
-	<img src="media/cachet.png" width="50" height="60">
+	<center>
+		<img src="media/fsdmlogo.png" >
+		<h1><B>Faculté des Sciences Dhar El Mahraz</B></h1>
+		</br>
+		</br>
+		<h1>RECU DE REINSCRIPTION</h1>
+		<h5>Annéé Universitaire : 2022/2023</h5></center>
+	</br>
+</br>
+</br>
+		<p>le <B>doyen de la Faculté des Sciences Dhar El Mahraz </B>atteste que l'étudiant(e):</p>
+		<ul>
+			<li><strong>Nom et Prénom : </strong> {{ profile.nom }} {{ profile.prenom }}</li>
+			<li><strong>Num. Massar : </strong> {{ profile.cne }}</li>		
+			<li><strong>C.I.N : </strong> {{ profile.cin }}</li>
+			<li><strong>Né(e) le </strong>{{ profile.datenaissance }} à {{ profile.lieunaissance }}</li>
+			<li><strong>est inscrit(e) à la filière:</strong> {{ profile.filiere }}</li>
+			<li>au titre de l'année universitaire : 2022/2023</li>
+		</ul>	
+		<p>																				</p></br>
+		<p>																				</p></br>
+		<p>																				</p></br>
+		<p>																				</p></br>
+		<p>																				</p></br>
+		<p>																				</p></br>
+		<p>																				</p></br>
+		<center><p>Fait le: {{ date }}</p>
+		<p>Cachet</p>
+		<img src="media/cachet1.png" width="60" height="60"></center>
+		
+		<img src="media/barcodes/{{barcode_path}}" alt="Barcode" width="50" height="50">
+		
 </body>
 </html>

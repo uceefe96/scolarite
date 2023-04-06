@@ -9,7 +9,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.views import View
 from django.utils.decorators import method_decorator
-from .models import Profile, Module #, Attestation
+from .models import Profile, Module, Attestationrequest 
 from xhtml2pdf import pisa
 from django.http import FileResponse
 import io
@@ -19,6 +19,48 @@ from reportlab.lib.pagesizes import letter
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
+import barcode
+from barcode.writer import ImageWriter
+from barcode import Code128
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        nom = request.POST['nom']
+        prenom = request.POST['prenom']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+
+        if password == password2:
+            if User.objects.filter(email=email).exists():
+                messages.info(request, 'Email Taken')
+                return redirect('signup')
+            elif User.objects.filter(username=username).exists():
+                messages.info(request, 'Username Taken')
+                return redirect('signup')
+            else:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save()
+
+                #log user in and redirect to settings page
+                user_login = auth.authenticate(username=username, password=password)
+                auth.login(request, user_login)
+
+                #create a Profile object for the new user
+                user_model = User.objects.get(username=username)
+                new_profile = Profile.objects.create(user=user_model, id_user=user_model.id)
+                new_profile.save()
+                return redirect('settings')
+        else:
+            messages.info(request, 'Password Not Matching')
+            return redirect('signup')
+        
+    else:
+        return render(request, 'signup.html')
+
 
 
 
@@ -26,33 +68,14 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
-
-    feed = []
-
-    feed_list = list(chain(*feed))
-
-    
-    username_profile = []
-    username_profile_list = []
-
-    for ids in username_profile:
-        profile_lists = Profile.objects.filter(user_id=ids)
-        username_profile_list.append(profile_lists)
-
-    suggestions_username_profile_list = list(chain(*username_profile_list))
-
-    return render(request, 'index.html', {'user_profile': user_profile, 'posts':feed_list, 'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
-
+    return render(request, 'index.html', {'user_profile': user_profile})
 
 @login_required(login_url='signin')
-def profile(request, pk):
-    user_object = User.objects.get(username=pk)
-    user_profile = Profile.objects.get(user=user_object)
-    context = {
-        'user_object': user_object,
-        'user_profile': user_profile,
-    }
-    return render(request, 'profile.html', context)
+def settings(request):
+    profile = request.user.profile
+    return render(request, 'profile.html', {'profile': profile})
+
+
 
 
 def signin(request):
@@ -77,18 +100,47 @@ def logout(request):
     auth.logout(request)
     return redirect('signin')
 
+@login_required(login_url='signin')
+@csrf_exempt
+def render_to_pdf1(request):
+
+    Attestationrequest.objects.create(user=request.user)
+    # profiles  = Profile.objects.all()
+    profile = request.user.profile
+    module = Module.objects.filter(profile=profile)
+    date = datetime.now().strftime('%d-%m-%Y')
+
+    template_path = 'attestation_scolarite.html'
+    context = {'profile': profile, 'module': module, 'date': date} #
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="profile.pdf"'
+
+    template =get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse('PDF Creation Failed', status=500)
+    return response
 
 
 @login_required(login_url='signin')
 @csrf_exempt
 def render_to_pdf(request):
     # profiles  = Profile.objects.all()
+    Attestationrequest.objects.create(user=request.user)
     profile = request.user.profile
-    modules = Module.objects.filter(profile=profile)
+    # barcode_value = 'user_{}'.format(request.profile.id)
+    # barcode = Code128(barcode_value, writer=ImageWriter())
+    # Render the PDF template with the user's information
+    context = {'profile': profile} #, 'barcode_path': barcode.save('media/barcodes/{}'.format(barcode_value))
+    # modules = Module.objects.filter(profile=profile)
     date = datetime.now().strftime('%d-%m-%Y')
 
+
     template_path = 'attestation.html'
-    context = {'profile': profile, 'modules': modules, 'date': date}
+    context = {'profile': profile,  'date': date}#'modules': modules,
     
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="profile.pdf"'
