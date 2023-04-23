@@ -1,6 +1,188 @@
 {% load static %}
 
 <!DOCTYPE html>
+<html lang="fr">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <title>Faculté des Sciences Fès</title>
+
+    <!-- Styles -->
+    <link href="https://www.fsdm.usmba.ac.ma/css/appet.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="https://www.fsdm.usmba.ac.ma/Template/img/USMBA.png"/>
+    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/icon.css" type="text/css" />
+    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/js/datepicker/datepicker.css" type="text/css" />
+    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/js/chosen/chosen.css" type="text/css" />
+
+
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="/">
+                        Scolarité
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user" style="display: block;" >
+                        <!-- Authentication Links -->
+                        <li><a href="#"><img src="{{profile.profileimg.url}}" class="header-avatar" alt=""></a></li>
+						<li><a href="/">HOME</a></li>
+                        <li><a href="/settings" ><span class="blinking" ><b>{{user.profile.nom}}  {{user.profile.prenom}}</b></span></a></li> 
+                        <li><a href="logout" >Déconexion</a></li>              
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<section style="padding-top:40px">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="panel panel-default">
+							<div class="panel-heading">Profile: {{user.profile.nom}}  {{user.profile.prenom}}</div>
+								<div class="panel-body">
+									<table class="table table-hover">
+										<div class="col-sm-12" align="center" >
+											<img width="150" height="150" src="{{profile.profileimg.url}}" class="img-circle" >
+										</div>
+										<thead>
+											<tr>
+											  <th scope="row" style="color: black"><b>Filière : {{ profile.filiere }} ({{ filiere.intituleFiliere}}) </b></th>
+											  <td></td>
+											</tr>
+											<tr>
+											  <th scope="row" style="color: black"><b>Informations Personnelles </b></th>
+											  <td></td>
+											</tr>
+											<tr>
+											  <th scope="col">Nom & Prénom</th>
+											  <td >{{ profile.nom }} {{ profile.prenom }} - {{profile.arabicnam}} </span> </td>
+											</tr>
+										  </thead>
+										  <tbody>
+											<tr>
+											  <th scope="row">CIN</th>
+											  <td>{{profile.cin}}</span></td>
+											</tr>
+											<tr>
+											  <th scope="row">Date & Lieu de Naissance</th>
+											  <td>{{profile.datenaissance}} à {{profile.lieunaissance}} - {{profile.arabiclieunaissance}} </span></td>
+											</tr>
+											<tr>
+											  <th scope="row">Adresse</th>
+											  <td>{{profile.adresse}}  </span></td>
+											</tr>
+											<tr>
+											  <th scope="row">Pays </th>
+											  <td> {{profile.pays}} </span></td>
+											</tr>
+											<tr>
+											  <th scope="row">Ville Naissance </th>
+											  <td>{{profile.lieunaissance}}  </span></td>
+											</tr>
+											<tr>
+											  <th scope="row">Sexe </th>
+											  <td> {{profile.idsex}} </span></td>
+											</tr> 
+											<tr>
+											  <th scope="row">Handicap </th>
+											  <td> {{profile.idhandicap}}  </span></td>
+											</tr>
+											<tr>
+											  <th scope="row" style="color: black"><b>Informations Baccalauréat</b></th>
+											  <td></td>
+											</tr>
+											 <tr>
+											  <th scope="row">CNE</th>
+											  <td>{{profile.cne}}  </span></td>
+											</tr>
+											 <tr>
+											  <th scope="row">Série </th>
+											  <td>{{profile.idbac}}  </span></td>
+											</tr>
+											 <tr>
+											  <th scope="row">Annèe d'Obtention </th>
+											  <td>{{profile.obtionbac}}  </span></td>
+											</tr>
+											 <tr>
+											  <th scope="row">Académie </th>
+											  <td>FES MEKNESS  </span></td>
+											</tr>
+											<tr>
+											  <th scope="row">Mention</th>
+											  <td>{{profile.idmention}}  </span></td>
+											</tr>
+											<tr>
+											  <th scope="row" style="color: black"><b>Informations Supplémentaire</b></th>
+											  <td></td>
+											</tr>
+											<tr>
+											  <th scope="row">Email Académique</th>
+											  <td> {{profile.mailacademique}} </span></td>
+											</tr>
+											<tr>
+											  <th scope="row">Email Personnel</th>
+											  <td>{{profile.mail}}  </span></td>
+											</tr>
+											 <tr>
+											  <th scope="row">Téléphone</th>
+											  <td>{{profile.tel}}  </span></td>
+											</tr>
+										  </tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+<!DOCTYPE html>
 <html lang="en">
 
 
@@ -31,12 +213,8 @@
 				<a href="#">
 					<img src="{{profile.profileimg.url}}" class="header-avatar" alt="">
 				</a>
-				<div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
-					<ul>
-						<li><a href="/"> Home </a> </li>
-						<li><a href="logout"> Log Out</a></li>
-					</ul>
-				</div>
+				<a href="/"> Home           |</a>
+						<a href="logout"> Log Out</a>
 
 			</div>
 		</div>
@@ -55,16 +233,16 @@
 						<div class="col-lg-2 col-sm-3">
 							<div class="user-avatar">
 								<figure>
-									<img src="{{profile.profileimg.url}}" style="height: 250px; width: 100%;" alt="">
-									
+									<img src="{{user.profile.profileimg.url}}" style="height: 250px; width: 250px; object-fit: cover;" alt="">
 								</figure>
 							</div>
+							
 						</div>
 						<div class="col-lg-10 col-sm-9">
 							<div class="timeline-info">
 								<ul>
 									<li class="admin-name">
-									  <h5 style="color: black;white-space: nowrap; width: 110px; font-size: 27px;"><b>@{{profile.user.username}}</b><!--<i class="fa fa-check-circle" style="color: #48dbfb;" aria-hidden="true"></i>--></h5>
+									  <h5 style="color: black;white-space: nowrap; width: 110px; font-size: 27px;"><b>@{{profile.prenom}} {{profile.nom}}</b><!--<i class="fa fa-check-circle" style="color: #48dbfb;" aria-hidden="true"></i>--></h5>
 									  <!--<span>Group Admin</span>-->
 									</li>
 								
@@ -98,8 +276,8 @@
 										<li><strong>Nom et Prénom : </strong> {{ profile.nom }} {{ profile.prenom }}</li>
 										<li><strong>Num. Massar : </strong> {{ profile.cne }}</li>		
 										<li><strong>C.I.N : </strong> {{ profile.cin }}</li>
-										<li><strong>Né(e) le </strong>{{ profile.date_naissance }} à {{ profile.lieu_naissance }}</li>
-										<li><strong>est inscrit(e) à la filière:</strong> {{ profile.filier }}</li>
+										<li><strong>Né(e) le </strong>{{ profile.datenaissance }} à {{ profile.lieunaissance }}</li>
+										<li><strong>est inscrit(e) à la filière:</strong> {{ profile.filiere }}</li>
 										<li>au titre de l'année universitaire : 2022/2023</li>
 									</ul>	
 									<!--<div class="lodmore"><button class="btn-view btn-load-more"></button></div>-->
@@ -132,4 +310,4 @@
 </body>	
 
 
-</html>
+</html> {% endcomment %}

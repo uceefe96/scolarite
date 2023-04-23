@@ -6,32 +6,83 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 
-class Attestationrequest(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_request = models.DateTimeField(auto_now_add=True)
+
+
+
+
+class Handicap(models.Model):
+    idhandicap = models.AutoField(db_column='idHandicap', primary_key=True)  # Field name made lowercase.
+    handicap = models.CharField(db_column='Handicap', max_length=45, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'attestationrequest'
+        db_table = 'handicap'
     def __str__(self):
-        return f"{self.user.profile.cne} - {self.date_request}"
+        return self.handicap
+
+
+
+class Sex(models.Model):
+    idsex = models.AutoField(db_column='idSEX', primary_key=True)  # Field name made lowercase.
+    sex = models.CharField(db_column='SEX', max_length=45, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'sex'
+    def __str__(self):
+        return self.sex    
+
+
+
+class Bac(models.Model):
+    idbac = models.AutoField(db_column='idBAC', primary_key=True)  # Field name made lowercase.
+    bac = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bac'
+    def __str__(self):
+        return self.bac     
+
+
+
+class Attestation(models.Model):
+    idattestation = models.AutoField(primary_key=True)
+    attestation = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'attestation'
+    def __str__(self):
+        return self.attestation
 
 class Filiere(models.Model):
     idfiliere = models.AutoField(db_column='idFiliere', primary_key=True)  # Field name made lowercase.
-    nomfiliere = models.CharField(db_column='nomFiliere', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    intitulefiliere = models.CharField(db_column='intituleFiliere', max_length=45, blank=True, null=True)  # Field name made lowercase.    
-
+    nomfiliere = models.CharField(db_column='nomFiliere', max_length=45, blank=True, null=True)  # Field name made lowercase.       
+    intitulefiliere = models.CharField(db_column='intituleFiliere', max_length=45, blank=True, null=True)  # Field name made lowercase.
     class Meta:
         managed = False
         db_table = 'filiere'
-
     def __str__(self):
-        return self.nomfiliere
+        return self.intitulefiliere     
+
+
+class Semestre(models.Model):
+    idsemestre = models.AutoField(primary_key=True)
+    semestre = models.CharField(max_length=45, blank=True, null=True)
+    idFiliere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='idF', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'semestre'
+    def __str__(self):
+        return self.semestre 
+
 
 class Module(models.Model):
     profileid = models.ForeignKey('Profile', models.DO_NOTHING, db_column='profileid', blank=True, null=True)
-    cne = models.CharField(max_length=45, blank=True, null=True)
     module = models.CharField(max_length=45, blank=True, null=True)
+    idfiliere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='idfiliere', blank=True, null=True)
     # note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
 
     class Meta:
@@ -40,6 +91,17 @@ class Module(models.Model):
 
     def __str__(self):
         return self.module
+
+
+class Mention(models.Model):
+    idmention = models.AutoField(primary_key=True)
+    mention = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'mention'
+    def __str__(self):
+        return self.mention   
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -51,21 +113,74 @@ class Profile(models.Model):
     datenaissance = models.CharField(db_column='dateNaissance', max_length=45, blank=True, null=True)  # Field name made lowercase.        
     lieunaissance = models.CharField(db_column='lieuNaissance', max_length=45, blank=True, null=True)  # Field name made lowercase.        
     filiere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='filiere', blank=True, null=True)
-    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')
-    modules = models.ManyToManyField(Module, through='Note')
+    profileimg = models.ImageField(upload_to='profile_images', default='media/blank-profile-picture.png')
+    # modules = models.ManyToManyField(Module, through='Note')
+    tel = models.IntegerField(db_column='Tel', blank=True, null=True)  # Field name made lowercase.
+    obtionbac = models.CharField(max_length=45, blank=True, null=True)
+    mail = models.CharField(max_length=45, blank=True, null=True)
+    mailacademique = models.CharField(max_length=45, blank=True, null=True)
+    idbac = models.ForeignKey(Bac, models.DO_NOTHING, db_column='idbac', blank=True, null=True)
+    idmention = models.ForeignKey(Mention, models.DO_NOTHING, db_column='idmention', blank=True, null=True)
+    arabicnam = models.CharField(max_length=45, blank=True, null=True)
+    arabiclieunaissance = models.CharField(max_length=45, blank=True, null=True)
+    idsex = models.ForeignKey('Sex', models.DO_NOTHING, db_column='idsex', blank=True, null=True)
+    idhandicap = models.ForeignKey(Handicap, models.DO_NOTHING, db_column='idhandicap', blank=True, null=True)
+    pays = models.CharField(db_column='Pays', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    adresse = models.CharField(db_column='Adresse', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
 
     class Meta:
         managed = False
         db_table = 'profile'
     def __str__(self):
         return self.user.username    
-    
-    
 
-class Note(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    module = models.ForeignKey(Module, on_delete=models.CASCADE)
-    note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+
+# class Ascolarite(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     attestation = models.CharField(max_length=45, blank=True, null=True)
+#     def __str__(self):
+#         return self.attestation   
+
+class Attestationrequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_request = models.DateTimeField(auto_now_add=True)
+    attestation = models.ForeignKey(Attestation, models.DO_NOTHING, db_column='attestation', blank=True, null=True)
 
     class Meta:
-        unique_together = ('profile', 'module')
+        managed = False
+        db_table = 'attestationrequest'
+    def __str__(self):
+        return f"{self.date_request}  {self.user.profile.cne}  {self.user.profile.nom}  {self.user.profile.prenom}  {self.user.profile.filiere}  {self.attestation}"
+    
+
+
+
+
+
+# class Note(models.Model):
+#     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+#     module = models.ForeignKey(Module, on_delete=models.CASCADE)
+#     note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+
+#     class Meta:
+#         unique_together = ('profile', 'module')
+
+# class Note(models.Model):
+#     idnote = models.AutoField(primary_key=True)
+#     user = models.ForeignKey(User, models.DO_NOTHING, blank=True, null=True)
+#     module = models.ForeignKey(Module, models.DO_NOTHING, db_column='module', blank=True, null=True)
+#     note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+
+#     class Meta:
+#         filiere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='filiere', blank=True, null=True)
+#         profileimg = models.TextField(blank=True, null=True)
+#         user = models.ForeignKey(User, models.DO_NOTHING, blank=True, null=True)
+
+#     class Meta:
+#         managed = False
+#         db_table = 'profile'        
+
+
+

@@ -7,6 +7,7 @@
 <body>
 	<center>
 		<img src="media/fsdmlogo.png" >
+		
 		<h1><B>Faculté des Sciences Dhar El Mahraz</B></h1>
 		</br>
 		</br>
@@ -21,7 +22,7 @@
 			<li><strong>Num. Massar : </strong> {{ profile.cne }}</li>		
 			<li><strong>C.I.N : </strong> {{ profile.cin }}</li>
 			<li><strong>Né(e) le </strong>{{ profile.datenaissance }} à {{ profile.lieunaissance }}</li>
-			<li><strong>est inscrit(e) à la filière:</strong> {{ profile.filiere }}</li>
+			<li><strong>est inscrit(e) à la filière:</strong> {{ profile.filiere }} </li>
 			<li>au titre de l'année universitaire : 2022/2023</li>
 		</ul>	
 		<p>																				</p></br>
@@ -35,7 +36,9 @@
 		<p>Cachet</p>
 		<img src="media/cachet1.png" width="60" height="60"></center>
 		
-		<img src="media/barcodes/{{barcode_path}}" alt="Barcode" width="50" height="50">
-		
+		{% comment %} <img src="media/qr/qr.png" alt="QR Code" width="1" height="1"> {% endcomment %}
+		<img src="{{ MEDIA_URL }}qrcode_image/{{ profile.user.username }}.png" alt="QR code">
+
+
 </body>
 </html>

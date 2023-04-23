@@ -23,11 +23,10 @@
 		<p>Filière:</strong> {{ profile.filiere }}</p></br>
 		<p>Modules suivis : </p></br>
 		<ul>
-			{% for p in profile %}
-				<h2>{{ Modules }}</h2>
+			{% for module in module %}
+			  <li>{{ module.module }} </li>
 			{% endfor %}
-		</ul>
-		
+		</ul>		
 		  
 
 																					</br>
