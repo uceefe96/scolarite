@@ -20,13 +20,13 @@
 		<p><strong>Né(e) le </strong>{{ profile.datenaissance }} à {{ profile.lieunaissance }}</p></br>
 		<p>CNE :              {{ profile.cne }}              C.I.N :   {{ profile.cin }} </p></br>
 		<p>est inscrit(e) pour la session universitaire :                   Printemps 2022/2023</p></br>
-		<p>Filière:</strong> {{ profile.filiere }}</p></br>
-		<p>Modules suivis : </p></br>
-		<ul>
-			{% for module in module %}
-			  <li>{{ module.module }} </li>
+		<p>Filière: {{ profile.filiere }}</p>
+		<p>Modules suivis:</p>
+		<ol>
+			{% for module in profile.modules.all %}
+				<strong><li>{{ module.module }} {{module.IdSemestre}}</li><strong>
 			{% endfor %}
-		</ul>		
+		</ol>		
 		  
 
 																					</br>

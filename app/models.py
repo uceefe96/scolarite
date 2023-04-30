@@ -53,6 +53,7 @@ class Attestation(models.Model):
     class Meta:
         managed = False
         db_table = 'attestation'
+
     def __str__(self):
         return self.attestation
 
@@ -80,10 +81,11 @@ class Semestre(models.Model):
 
 
 class Module(models.Model):
-    profileid = models.ForeignKey('Profile', models.DO_NOTHING, db_column='profileid', blank=True, null=True)
+    profileid = models.ForeignKey('Profile', models.DO_NOTHING, db_column='profileid', blank=True, null=True,related_name='modules')
     module = models.CharField(max_length=45, blank=True, null=True)
     idfiliere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='idfiliere', blank=True, null=True)
-    # note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    idsemestre = models.ForeignKey('Semestre', models.DO_NOTHING, db_column='IdSemestre', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -113,7 +115,7 @@ class Profile(models.Model):
     datenaissance = models.CharField(db_column='dateNaissance', max_length=45, blank=True, null=True)  # Field name made lowercase.        
     lieunaissance = models.CharField(db_column='lieuNaissance', max_length=45, blank=True, null=True)  # Field name made lowercase.        
     filiere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='filiere', blank=True, null=True)
-    profileimg = models.ImageField(upload_to='profile_images', default='media/blank-profile-picture.png')
+    profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')#profileimg = models.TextField(blank=True, null=True)
     # modules = models.ManyToManyField(Module, through='Note')
     tel = models.IntegerField(db_column='Tel', blank=True, null=True)  # Field name made lowercase.
     obtionbac = models.CharField(max_length=45, blank=True, null=True)
@@ -136,12 +138,7 @@ class Profile(models.Model):
         return self.user.username    
 
 
-# class Ascolarite(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     attestation = models.CharField(max_length=45, blank=True, null=True)
-#     def __str__(self):
-#         return self.attestation   
+
 
 class Attestationrequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -151,9 +148,9 @@ class Attestationrequest(models.Model):
     class Meta:
         managed = False
         db_table = 'attestationrequest'
+
     def __str__(self):
-        return f"{self.date_request}  {self.user.profile.cne}  {self.user.profile.nom}  {self.user.profile.prenom}  {self.user.profile.filiere}  {self.attestation}"
-    
+        return f"{self.date_request}  {self.user.profile.cne}  {self.user.profile.nom}  {self.user.profile.prenom}  {self.user.profile.filiere}  {self.attestation.attestation if self.attestation else ''}"
 
 
 

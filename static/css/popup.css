@@ -1,0 +1,47 @@
+/* Style de la modal */
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionnement absolu */
+    z-index: 1; /* Situé au dessus des autres éléments */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Pour activer le défilement si le contenu est plus grand que l'écran */
+    background-color: rgba(0,0,0,0.5); /* Fond semi-transparent pour créer un effet d'ombre */
+  }
+  
+  /* Style du contenu de la modal */
+  .modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+  }
+  
+  /* Style pour le bouton d'impression */
+  .print-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Style pour le bouton de fermeture */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

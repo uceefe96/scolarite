@@ -66,7 +66,6 @@ def signup(request):
         else:
             messages.info(request, 'Password Not Matching')
             return redirect('signup')
-        
     else:
         return render(request, 'signup.html')
 
@@ -91,9 +90,7 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
         user = auth.authenticate(username=username, password=password)
-
         if user is not None:
             auth.login(request, user)
             return redirect('/')
@@ -109,27 +106,41 @@ def logout(request):
     auth.logout(request)
     return redirect('signin')
 
+
 @login_required(login_url='signin')
 @csrf_exempt
-def attestationscolarite(request):
-
+def bilandenotes(request):
+    attestation = Attestation.objects.get(attestation="bilan de note")
+    Attestationrequest.objects.create(user=request.user, attestation=attestation)
     Attestationrequest.objects.create(user=request.user)
     profile = request.user.profile
     date = datetime.now().strftime('%d-%m-%Y')
     # module = Module.objects.filter(profile=profile)
     context = {'profile': profile, 'date': date} #, 'module': module
-    
-    
-
-    template_path = 'attestation_scolarite.html'
-    #
-    
+    template_path = 'bilan_note.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="profile.pdf"'
-
     template =get_template(template_path)
     html = template.render(context)
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse('PDF Creation Failed', status=500)
+    return response
 
+@login_required(login_url='signin')
+@csrf_exempt
+def attestationscolarite(request):
+    attestation = Attestation.objects.get(attestation="attestation de scolarité")
+    Attestationrequest.objects.create(user=request.user, attestation=attestation)
+    Attestationrequest.objects.create(user=request.user)
+    profile = request.user.profile
+    date = datetime.now().strftime('%d-%m-%Y')
+    context = {'profile': profile, 'date': date} #, 'module': module
+    template_path = 'attestation_scolarite.html'    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="profile.pdf"'
+    template =get_template(template_path)
+    html = template.render(context)
     pisa_status = pisa.CreatePDF(html, dest=response)
     if pisa_status.err:
         return HttpResponse('PDF Creation Failed', status=500)
@@ -140,69 +151,18 @@ def attestationscolarite(request):
 @login_required(login_url='signin')
 @csrf_exempt
 def attestationreinscription(request):
-    # attestation = Attestation.objects.create(user=request.user)
-    Attestationrequest.objects.create(user=request.user)
-    
+    attestation = Attestation.objects.get(attestation="attestation de reinscription")
+    Attestationrequest.objects.create(user=request.user, attestation=attestation)
     profile = request.user.profile
-    
     date = datetime.now().strftime('%d-%m-%Y')
-    context = {'profile': profile, 'date': date} #, 'barcode_path': barcode.save('media/barcodes/{}'.format(barcode_value))
-    
-    
-
-
+    context = {'profile': profile, 'date': date}
     template_path = 'attestation.html'
-    
-    
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="profile.pdf"'
-
     template =get_template(template_path)
     html = template.render(context)
-
     pisa_status = pisa.CreatePDF(html, dest=response)
     if pisa_status.err:
         return HttpResponse('PDF Creation Failed', status=500)
     return response
 
-
-
-# import os
-
-# @login_required(login_url='signin')
-# @csrf_exempt
-# def attestationreinscription(request):
-    
-#     Attestationrequest.objects.create(user=request.user)
-    
-#     profile = request.user.profile
-    
-#     date = datetime.now().strftime('%d-%m-%Y')
-#     context = {'profile': profile, 'date': date}
-    
-#     # Génération du code QR
-#     qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
-#     qr.add_data("@login_required(login_url='signin')\n@csrf_exempt\ndef attestationreinscription(request):\n    Attestationrequest.objects.create(user=request.user)\n    profile = request.user.profile\n    date = datetime.now().strftime('%d-%m-%Y')\n    context = {'profile': profile, 'date': date}\n    template_path = 'attestation.html'\n    response = HttpResponse(content_type='application/pdf')\n    response['Content-Disposition'] = 'filename=\"profile.pdf\"'\n    template = get_template(template_path)\n    html = template.render(context)\n    pisa_status = pisa.CreatePDF(html, dest=response)\n    if pisa_status.err:\n        return HttpResponse('PDF Creation Failed', status=500)\n    return response")
-#     qr.make(fit=True)
-#     qr_image = qr.make_image(fill_color="black", back_color="white")
-
-#     # Enregistrement de l'image QR dans le dossier qrcode_image
-#     qr_image_path = os.path.join(settings.MEDIA_ROOT, 'media/qrcode_image', 'qrcode.png')
-#     qr_image.save(qr_image_path)
-
-#     # Conversion de l'image en base64
-#     with open(qr_image_path, 'rb') as f:
-#         qr_image_base64 = base64.b64encode(f.read()).decode('utf-8')
-
-#     context['qrcode_image'] = 'data:image/png;base64,{}'.format(qr_image_base64)
-#     template = loader.get_template('attestation.html')
-#     html = template.render(context)
-    
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = 'filename="profile.pdf"'
-    
-#     pisa_status = pisa.CreatePDF(html, dest=response)
-#     if pisa_status.err:
-#         return HttpResponse('PDF Creation Failed', status=500)
-    
-#     return response

@@ -14,87 +14,99 @@
     <!-- Styles -->
     <link href="https://www.fsdm.usmba.ac.ma/css/appet.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="https://www.fsdm.usmba.ac.ma/Template/img/USMBA.png"/>
+    <link rel="stylesheet" href="{% static 'logo.css' %}">
 
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
-            
-
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="https://www.fsdm.usmba.ac.ma">FSDM</a></li>
-                    <li><a href="https://www.fsdm.usmba.ac.ma/Student">Connexion</a></li>
-                </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user" style="display: block;" >
                     <!-- Authentication Links -->
-                                              <li><a href="https://www.fsdm.usmba.ac.ma">FSDM</a></li>
-                      <li><a a href="signin" class="">Connexion</a></li>
+                    <li><a>FSDM</a></li>
+                    <li><a a href="signin" class="">Connexion</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-<section class="">
+<section class="background-image">
     <!-- Jumbotron -->
     
     <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
-      <div class="container">
-        <div class="row gx-lg-5 align-items-center">
-          <div class="col-lg-6 mb-5 mb-lg-0">
-            <h4 class="my-5 display-3 fw-bold ls-tight">Université Sidi Mohamed Ben Abdellah </h4><br /><h5><span class="text-primary">Faculté Des Sciences Dhar El Mahraz</span></h5>
-            <p style="color: hsl(217, 10%, 50.8%)">
-                <img src="{% static 'media/usmba.jpg' %}" alt="">
-            </p>
-          </div>
-          <div class="col-lg-6 mb-5 mb-lg-0">
-            <div class="card">
-              <div class="card-body py-5 px-md-5">
-                <div>
-                    <style>
-                        h5{
-                            color: red;
-                        }
-                    </style>
-                    {% for message in messages %}
-                    <h5>{{message}}</h5>
-                    {% endfor %}
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <p class="my-5 display-3 ls-tight" style="color: hsl(200, 10%, 50.8%)">
+                        <img src="{% static 'azd.png' %}" alt=""> 
+                    </p>
+                    <h4 class="my-5 display-3 fw-bold ls-tight">كلية العلوم ضهر المهراز</h4><br /> 
+                    <h4><span class="text-primary my-5 display-3 fw-bold ls-tight">ⴽⵍⵢⴰ ⴰⵍⵄⵍⵓⵎ ⴹⵀⵔ ⴰⵍⵎⵀⵔⴰⵣ</span></h4> 
+                    
                 </div>
-                
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="_token" value="5QoAoQE9cbpxjfZqIx6cB9eMke03jOWHYYgr5nM3">
-                    <input type="hidden" name="_token" value="5QoAoQE9cbpxjfZqIx6cB9eMke03jOWHYYgr5nM3">
-                    
-                    <div class="form-group">
-                        <label input type="username" name="username" placeholder="Code National D'étudiant" class="col-md-4 control-label">CNE</label>
-                        <div class="col-md-6">
-                            <input onkeyup="this.value=this.value.toUpperCase()" id="username" type="text" class="form-control" name="username" value="" required autofocus>
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card">
+                    <div class="card-body py-5 px-md-5">
+                        <div>
+                            <style>
+                                h5{
+                                    color: red;
+                                }
+                            </style>
+                            {% for message in messages %}
+                            <h5>{{message}}</h5>
+                            {% endfor %}
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label input type="password" name="password" placeholder="Code d'Identité National" class="col-md-4 control-label">CIN</label>
-                        <div class="col-md-6">
-                            <input onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"  id="password" type="text" class="form-control" name="password" required> 
-
-                                                            <br/>
-
-
-                        </div>
-                    </div>
-
                     
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="_token" value="">
+                            
+                            <div class="form-group">
+                                <label input type="username" name="username" placeholder="Code National D'étudiant" class="col-md-4 control-label">CNE</label>
+                                <div class="col-md-6">
+                                    <input onkeyup="this.value=this.value.toUpperCase()" id="username" type="text" class="form-control" name="username" value="" required autofocus>
+                                    <br/>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Se connecter
-                            </button>
-                </form>
-              </div>
+                            <div class="form-group">
+                                <label input type="password" name="password" placeholder="Code d'Identité National" class="col-md-4 control-label">CIN</label>
+                                <div class="col-md-6">
+                                    <input onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"  id="password" type="text" class="form-control" name="password" required> <br/>
+                                </div>
+                            </div>
+                        
+                        </br>
+                        
+
+                    </br>
+                        
+                </br>
+                        
+            </br>
+                        
+        </br>
+                        
+        </br>
+                        
+        </br>
+                        
+        </br>
+                        
+        </br>
+                        
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                                </div>
+                                <div class="text-center mt-5 space-x-2">
+                                    <p class="text-base"> Not registered? <a href="signup" class=""> Create a account </a></p>
+                                </div>
+                            </div>
+                        </form>
+                </div>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -113,7 +113,141 @@
     <script src="{% static 'assets/js/custom.js' %}"></script>
 
 
-</body>
+</body> {% endcomment %}
 
 
 </html>
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<!-- Section: Design Block -->
+{%load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Faculté des Sciences Fès</title>
+
+    <!-- Styles -->
+    <link href="https://www.fsdm.usmba.ac.ma/css/appet.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="https://www.fsdm.usmba.ac.ma/Template/img/USMBA.png"/>
+
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user" style="display: block;" >
+                    <!-- Authentication Links -->
+                    <li><a>FSDM</a></li>
+                    <li><a a href="signin" class="">Connexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<section class="">
+    <!-- Jumbotron -->
+    
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h4 class="my-5 display-3 fw-bold ls-tight">Université Sidi Mohamed Ben Abdellah </h4><br />
+                    <h5><span class="text-primary">Faculté Des Sciences Dhar El Mahraz</span></h5>
+                    <p style="color: hsl(217, 10%, 50.8%)">
+                        <img src="{% static 'media/usmba.jpg' %}" alt="">
+                    </p>
+                </div>
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card">
+                <div class="card-body py-5 px-md-5">
+                <div>
+                    <style>
+                        h5{
+                            color: red;
+                        }
+                    </style>
+                    {% for message in messages %}
+                    <h5>{{message}}</h5>
+                    {% endfor %}
+                </div>
+                
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="_token" value="">
+                    <input type="hidden" name="_token" value="">
+                    
+                    <div class="form-group">
+                        <label input type="text" name="Nom" placeholder="Code National D'étudiant" class="col-md-4 control-label">NOM</label>
+                        <div class="col-md-6">
+                            <input onkeyup="this.value=this.value.toUpperCase()" id="username" type="text" class="form-control" name="Nom" value="" required autofocus>
+                            <br/>
+                        </div>
+                        <label input type="text" name="Prenom" placeholder="Code National D'étudiant" class="col-md-4 control-label">Prenom</label>
+                        <div class="col-md-6">
+                            <input onkeyup="this.value=this.value.toUpperCase()" id="username" type="text" class="form-control" name="Prenom" value="" required autofocus>
+                            <br/>
+                        </div>
+                        <label input type="mail" name="mail" placeholder="mail" class="col-md-4 control-label">mail</label>
+                        <div class="col-md-6">
+                            <input id="mail" type="mail" class="form-control" name="mail" value="" required autofocus>
+                            <br/>
+                        </div>
+                        <label input type="username" name="text" placeholder="username" class="col-md-4 control-label">CNE</label>
+                        <div class="col-md-6">
+                            <input onkeyup="this.value=this.value.toUpperCase()" id="username" type="username" class="form-control" name="username" value="" required autofocus>
+                            <br/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label input type="password" name="password" placeholder="Code d'Identité National" class="col-md-4 control-label">CIN</label>
+                        <div class="col-md-6">
+                            <input onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"  id="password" type="text" class="form-control" name="password" required> <br/>
+                        </div>
+                        <label input type="password2" name="password2" placeholder="Code d'Identité National" class="col-md-4 control-label">CIN</label>
+                        <div class="col-md-6">
+                            <input onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"  id="password2" type="text" class="form-control" name="password2" required> <br/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center mt-5 space-x-2">
+                            
+                        </div>
+                        <div class="col-md-8 col-md-offset-4">
+                            <p class="text-base"> Already Have Account? <a href="signin" class=""> Login </a></p>
+                            <button type="submit" class="btn btn-primary">Enregsitrer</button>
+                        </div>
+                        
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+</body>
+{% comment %} <form action="" method="POST">
+    {% csrf_token %}    
+    <div class="flex lg:flex-row flex-col lg:space-x-2">
+        <input type="text" placeholder="Nom"  class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+        <input type="text" placeholder="Prenom" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+    </div>
+    <input type="text" name="username" placeholder="Username" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+    <input type="email" name="email" placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+    <input type="password" name="password" placeholder="Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+    <input type="password" name="password2" placeholder="Confirm Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+
+    <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Sign Up</button>
+    <div class="text-center mt-5 space-x-2">
+        <p class="text-base"> Do you have an account? <a href="/signin"> Login </a></p>
+    </div>
+</form> {% endcomment %}

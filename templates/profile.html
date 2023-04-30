@@ -3,29 +3,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
     <title>Faculté des Sciences Fès</title>
-
     <!-- Styles -->
     <link href="https://www.fsdm.usmba.ac.ma/css/appet.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="https://www.fsdm.usmba.ac.ma/Template/img/USMBA.png"/>
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/icon.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/js/datepicker/datepicker.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/js/chosen/chosen.css" type="text/css" />
-
-
 </head>
 
 <body>
+	
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -50,7 +38,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user" style="display: block;" >
                         <!-- Authentication Links -->
-                        <li><a href="#"><img src="{{profile.profileimg.url}}" class="header-avatar" alt=""></a></li>
+                        <li><a href="#"><img src="{% static profile.profileimg.url %}" class="header-avatar" alt=""></a></li>
 						<li><a href="/">HOME</a></li>
                         <li><a href="/settings" ><span class="blinking" ><b>{{user.profile.nom}}  {{user.profile.prenom}}</b></span></a></li> 
                         <li><a href="logout" >Déconexion</a></li>              
@@ -71,7 +59,7 @@
 										</div>
 										<thead>
 											<tr>
-											  <th scope="row" style="color: black"><b>Filière : {{ profile.filiere }} ({{ filiere.intituleFiliere}}) </b></th>
+											  <th scope="row" style="color: black"><b>Filière : {{ profile.filiere }} ({{ profile.filiere.intituleFiliere}}) </b></th>
 											  <td></td>
 											</tr>
 											<tr>
@@ -153,6 +141,7 @@
 											  <td>{{profile.tel}}  </span></td>
 											</tr>
 										  </tbody>
+										  
 
 
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+			
+	<title>Relevé De Notes</title>
+</head>
+<body>
+    <h3>Université Sid Mohammed Ben Abdellah</h3>
+    <h3>Faculté des Sciences Dhar El Mahraz</h3>
+    <h3>Fès</h3>
+	<center><h1><strong><B>Relevé De Notes</B></strong></h1></center>
+        <p>Nom :      {{profile.nom}} CNE :    {{profile.cne}}</p>
+        <p>Prénom : {{profile.prenom}}  CIN : {{profile.cin}} </p>
+        <p>Né le : {{profile.datenaissance}} Bac {{profile.idbac.bac}} </p>
+        <p>Filière : <strong> {{profile.filiere.nomfiliere}}</strong> </p>
+		</br>
+		</br>
+        {% comment %} <ul>
+            {% for semestre in profile.modules.order_by('idsemestre__semestre').values_list('idsemestre__semestre', flat=True).distinct %}
+              <h3>Semestre {{ semestre }}</h3>
+              <ul>
+                {% for module in profile.modules.filter(idsemestre__semestre=semestre) %}
+                  <li>{{ module.module }} {{ module.note }}</li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+        </ul>
+             {% endcomment %}
+            
+	
+	</br>

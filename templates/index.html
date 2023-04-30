@@ -1,120 +1,100 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-    <title>Faculté des Sciences Fès</title>
-
-    <!-- Styles -->
-    <link href="https://www.fsdm.usmba.ac.ma/css/appet.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="https://www.fsdm.usmba.ac.ma/Template/img/USMBA.png"/>
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/css/icon.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/js/datepicker/datepicker.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.fsdm.usmba.ac.ma/Template/js/chosen/chosen.css" type="text/css" />
-
-
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Faculté des Sciences Fès</title>
+        <!-- Styles -->
+        <link href="https://www.fsdm.usmba.ac.ma/css/appet.css" rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="https://www.fsdm.usmba.ac.ma/Template/img/USMBA.png"/>
+    </head>
+    <body>
+        <div id="app">
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- Branding Image -->
+                        <a class="navbar-brand" href="/">
+                            Scolarité
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                        <!-- Right Side Of Navbar -->
+                        <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user" style="display: block;" >
+                            <!-- Authentication Links -->
+                            <li><a href="#"><img src="{{profile.profileimg.url}}" class="header-avatar" alt=""></a></li>
+                            <li><a href="/settings" ><span class="blinking" ><b>{{user.profile.nom}}  {{user.profile.prenom}}</b></span></a></li> 
+                            <li><a href="logout" >Déconexion</a></li>              
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <section style="padding-top:40px">
             <div class="container">
-                <div class="navbar-header">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Bienvenue {{user.profile.prenom}} {{user.profile.nom}}</div>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="/">
-                        Scolarité
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user" style="display: block;" >
-                        <!-- Authentication Links -->
-                        <li><a href="#"><img src="{{profile.profileimg.url}}" class="header-avatar" alt=""></a></li>
-                        <li><a href="/settings" ><span class="blinking" ><b>{{user.profile.nom}}  {{user.profile.prenom}}</b></span></a></li> 
-                        <li><a href="logout" >Déconexion</a></li>              
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    <section style="padding-top:40px">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Bienvenue {{user.profile.prenom}} {{user.profile.nom}}</div>
-
-                        <div class="panel-body">
-                        <br/>
-                            <h4><b style="color: black">Attestation De Réinscription</b></h4>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="imgAbt">
-                                        <a><img src="{{ 'media/print.jpg' }}" width="200" height="150" align="right"   alt=""> </a>
-                                    </div> 
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="bg-gray-50 border-b border-gray-100 py-4 px-6 ">
-                                        <h2 class="font-semibold text-lg" ><a href={% url 'attestationscolarite' %}>Print</a></h2>
+                            <div class="panel-body">
+                            <br/>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="imgAbt">
+                                            <a target="_blank" href={% url 'attestationreinscription' %}><img src="{% static '2718413.png' %}" width="150" height="150" align="right"></a>
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h2><b style="color: black">Attestation De Réinscription</b></h2>
+                                        <div class="bg-gray-50 border-b border-gray-100 py-4 px-6 ">
+                                            <h2 class="font-semibold text-lg" ><a target='_blank' href={% url 'attestationreinscription' %}>Print</a></h2>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-<br/><br/>
-
-
-                            <h4><b style="color: black">Attestation De Scolarité</b></h4>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="imgAbt">
-                                        <a target="_blank" href={% url 'attestationscolarite' %}><img width="200" height="150" align="right" src="media/moodle.png"> </a>
+    <br/><br/>                            
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="imgAbt">
+                                            <a target="_blank" href={% url 'attestationscolarite' %}><img width="150" height="150" align="right" src="{% static '2718154.png' %}"> </a>
+                                        <!-- Button to trigger the modal -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h2><b style="color: black">Attestation De Scolarité</b></h2>
+                                        <div class="bg-gray-50 border-b border-gray-100 py-4 px-6 ">
+                                            <h2 class="font-semibold text-lg" ><a target='_blank' href={% url 'attestationscolarite' %}>Print</a></h2>
+                                        </div>
+                                    </div>
+                                </div><br/><br/>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="imgAbt">
+                                            <a target='_blank' href={% url 'attestationscolarite' %}><img width="150" height="150" align="right" src="{% static '4784338.png' %}"> </a>
+                                        <!-- Button to trigger the modal -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h2><b style="color: black">Bilan De Note</b></h2>
+                                        <div class="bg-gray-50 border-b border-gray-100 py-4 px-6 ">
+                                            <h2 class="font-semibold text-lg" ><a target='_blank' href={% url 'bilandenotes' %}>Print</a></h2>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="bg-gray-50 border-b border-gray-100 py-4 px-6 ">
-                                        <h2 class="font-semibold text-lg" ><a href={% url 'attestationscolarite' %}>Print</a></h2>
-                                    </div>
-                                </div>
-                            </div>
-<br/><br/>
-                            <h4><b style="color: black">Bilan De Note</b></h4>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="imgAbt">
-                                        <a><img align="right" src="media/facebook.png" alt=""> </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="bg-gray-50 border-b border-gray-100 py-4 px-6 ">
-                                        <h2 class="font-semibold text-lg" ><a href={% url 'attestationscolarite' %}>Attestation Scolarité</a></h2>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
+            
+        </section>
+        
         </div>
-    </section>
-    </div>
 
 
 
@@ -122,12 +102,10 @@
 
 
 
+        
 
 
-
-
-
-</body>
+    </body>
 </html>
 
 
