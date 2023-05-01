@@ -1,6 +1,4 @@
 from datetime import datetime
-from itertools import chain
-import base64
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
@@ -15,21 +13,12 @@ from xhtml2pdf import pisa
 from django.http import FileResponse
 import io
 from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
 from django.conf import settings
-from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
-import barcode
-from barcode.writer import ImageWriter
-from barcode import Code128
-import qrcode
 import io
 from django.http import HttpResponse
-from django.template import loader
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from project import settings
+
+
 
 
 
@@ -115,8 +104,8 @@ def bilandenotes(request):
     Attestationrequest.objects.create(user=request.user)
     profile = request.user.profile
     date = datetime.now().strftime('%d-%m-%Y')
-    # module = Module.objects.filter(profile=profile)
-    context = {'profile': profile, 'date': date} #, 'module': module
+    modules_semester1 = profile.modules.filter(idsemestre=1)
+    context = {'profile': profile, 'date': date, 'modules_semester1': modules_semester1}
     template_path = 'bilan_note.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="profile.pdf"'

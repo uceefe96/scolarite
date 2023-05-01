@@ -1,31 +1,158 @@
 <!DOCTYPE html>
 <html>
 <head>
-			
-	<title>Relevé De Notes</title>
+	<meta charset="utf-8">
+	<title>Relevé de notes universitaire</title>
+	<style type="text/css">
+		
+		th {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+		
+		
+	</style>
 </head>
 <body>
-    <h3>Université Sid Mohammed Ben Abdellah</h3>
-    <h3>Faculté des Sciences Dhar El Mahraz</h3>
-    <h3>Fès</h3>
-	<center><h1><strong><B>Relevé De Notes</B></strong></h1></center>
-        <p>Nom :      {{profile.nom}} CNE :    {{profile.cne}}</p>
-        <p>Prénom : {{profile.prenom}}  CIN : {{profile.cin}} </p>
-        <p>Né le : {{profile.datenaissance}} Bac {{profile.idbac.bac}} </p>
-        <p>Filière : <strong> {{profile.filiere.nomfiliere}}</strong> </p>
-		</br>
-		</br>
-        {% comment %} <ul>
-            {% for semestre in profile.modules.order_by('idsemestre__semestre').values_list('idsemestre__semestre', flat=True).distinct %}
-              <h3>Semestre {{ semestre }}</h3>
-              <ul>
-                {% for module in profile.modules.filter(idsemestre__semestre=semestre) %}
-                  <li>{{ module.module }} {{ module.note }}</li>
-                {% endfor %}
-              </ul>
-            {% endfor %}
-        </ul>
-             {% endcomment %}
-            
-	
-	</br>
+  <div ><h7>Université Sidi Mohammed BenAbdellah  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;   Faculté Des Sciences Dhar El Mahraz -Fès-</h7></div>
+	<div ><h3><center>Relevé de Notes</center></h3></div>
+	<div>
+		<span >Nom et prénom : {{ profile.nom }} {{ profile.prenom }} <span > &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; CNE : </span>{{ profile.cne }}<span > &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; CIN : </span>{{ profile.cin }}<span > &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; Bac : </span>{{ profile.obtionbac }}<br>
+		<span >Filière : </span>{{ profile.filiere.nomfiliere }}<span > &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; Année universitaire : </span>2022/2023</span>
+		
+	</div>
+
+  <div>
+	<table>
+    <thead style="border: 1px solid black;">
+      <tr>
+        <th>Semestre</th>
+        <th>Module</th>
+        <th>Validation</th>
+        <th>Session</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+  </table></br>
+  <table>
+    {% comment %} <tbody style="border: 1px solid black;"> {% endcomment %}
+      <tr>
+        <td rowspan="7"><strong><b>S1</strong></b></td>
+      {% for module in profile.modules.all %}
+          {% if module.idsemestre == 1 %}
+            <td>| {{ module.module }}</td>
+            <td>| {{ module.validation }}</td>
+            <td>| {{ module.session }}</td>
+            <td>| {{ module.note }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    {% comment %} </tbody> {% endcomment %}
+  </table>
+  <table>
+      <tr> 
+        <th><strong><u><b>Résultat de Semestre 1 : </strong></u></b>&nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Semestre  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     <strong><u><b>     Moyenne du Semestre  </strong></u></b>  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;      Moyenne </th>          
+        </tr>
+  </table>  </br>
+  <table>
+    <tr>
+    <td rowspan="7"><strong><b>S2</strong></b></td>
+      {% for module in profile.modules.all %}
+        {% if module.idsemestre == 2 %}
+          
+            <td>| {{ module.module }}</td>
+            <td>| {{ module.validation }}</td>
+            <td>| {{ module.session }}</td>
+            <td>| {{ module.note }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+  </table>
+  <table>
+    <tr> 
+      <th><strong><u><b>Résultat de Semestre 2 : </strong></u></b>&nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Semestre  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     <strong><u><b>     Moyenne du Semestre  </strong></u></b>  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;      Moyenne </th>      </tr>
+</table>  </br>
+<table>
+  <tr>
+  <td rowspan="6"><strong><b>S3</strong></b></td>
+    {% for module in profile.modules.all %}
+      {% if module.idsemestre == 3 %}
+        
+          <td>| {{ module.module }}</td>
+          <td>| {{ module.validation }}</td>
+          <td>| {{ module.session }}</td>
+          <td>| {{ module.note }}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+</table>
+<table>
+  <tr> 
+    <th><strong><u><b>Résultat de Semestre 3: </strong></u></b>&nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Semestre  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     <strong><u><b>     Moyenne du Semestre  </strong></u></b>  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     Moyenne </th>    </tr>
+</table>  </br>
+<table>
+  <tr>
+  <td rowspan="6"><strong><b>S4</strong></b></td>
+    {% for module in profile.modules.all %}
+      {% if module.idsemestre == 4 %}
+        
+          <td>| {{ module.module }}</td>
+          <td>| {{ module.validation }}</td>
+          <td>| {{ module.session }}</td>
+          <td>| {{ module.note }}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+</table>
+<table>
+  <tr> 
+    <th><strong><u><b>Résultat de Semestre 4 : </strong></u></b>&nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Semestre  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     <strong><u><b>     Moyenne du Semestre  </strong></u></b>  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     Moyenne </th>    </tr>
+</table>  </br>
+<table>
+  <tr>
+  <td rowspan="6"><strong><b>S5</strong></b></td>
+    {% for module in profile.modules.all %}
+      {% if module.idsemestre == 5 %}
+        
+          <td>| {{ module.module }}</td>
+          <td>| {{ module.validation }}</td>
+          <td>| {{ module.session }}</td>
+          <td>| {{ module.note }}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+</table>
+<table>
+  <tr> 
+    <th><strong><u><b>Résultat de Semestre 5 : </strong></u></b>&nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Semestre  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     <strong><u><b>     Moyenne du Semestre  </strong></u></b>  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;      Moyenne </th>    </tr>
+</table>  </br>
+<table  style="margin-top: 2px;margin-bottom: 2px;">
+  <tbody>
+    <tr>
+      <td rowspan="6"><strong><b>S6</strong></b></td>
+    {% for module in profile.modules.all %}
+      {% if module.idsemestre == 6 %}
+        
+          <td >{{ module.module }}</td>
+          <td >{{ module.validation }}</td>
+          <td >{{ module.session }}</td>
+          <td >{{ module.note }}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+<table  style="margin-top: 2px;margin-bottom: 2px;">
+  <tr> 
+    <th><strong><u><b>Résultat de Semestre 6 : </strong></u></b>&nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Semestre  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     <strong><u><b>     Moyenne du Semestre  </strong></u></b>  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;      Moyenne </th>
+    </tr>
+</table>  
+<table   style="margin-top: 2px;margin-bottom: 2px;">
+  <tr> 
+      <th>Résultat du DEUG : &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   .....  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          Moyenne de la Licence:   &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;      .....</th>
+    </tr>
+</table>  
+	<div style="margin-bottom: 1px;">N.B: Le présent relevé n'est délivré qu'en un seul exemplaire. il appartient à l'étudiant d'en faire des photocopies</div>
+</body>
+</html>

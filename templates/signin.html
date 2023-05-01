@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     <link href="https://www.fsdm.usmba.ac.ma/css/appet.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="https://www.fsdm.usmba.ac.ma/Template/img/USMBA.png"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'logoscolarite.png' %}"/>
     <link rel="stylesheet" href="{% static 'logo.css' %}">
 
 </head>
@@ -62,7 +62,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="_token" value="">
-                            
+                            <img width="80" height="90" src="{% static 'logoscolarite.png' %}" alt=""></br></br>
                             <div class="form-group">
                                 <label input type="username" name="username" placeholder="Code National D'étudiant" class="col-md-4 control-label">CNE</label>
                                 <div class="col-md-6">
@@ -81,28 +81,19 @@
                         </br>
                         
 
-                    </br>
-                        
-                </br>
-                        
-            </br>
+                    
                         
         </br>
-                        
-        </br>
-                        
-        </br>
-                        
-        </br>
+       
                         
         </br>
                         
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                                    <button style="background-color: #0d1750;" type="submit" class="btn btn-primary">Se connecter</button>
                                 </div>
                                 <div class="text-center mt-5 space-x-2">
-                                    <p class="text-base"> Not registered? <a href="signup" class=""> Create a account </a></p>
+                                    <p class="text-base"> Not registered? <a href="signup" class=""> Create an account </a></p>
                                 </div>
                             </div>
                         </form>

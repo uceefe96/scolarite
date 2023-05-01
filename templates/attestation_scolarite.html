@@ -24,16 +24,15 @@
 		<p>Modules suivis:</p>
 		<ol>
 			{% for module in profile.modules.all %}
-				<strong><li>{{ module.module }} {{module.IdSemestre}}</li><strong>
+				{% if module.note is None %}
+					<strong><li>{{profile.filiere}} - {{ module.module }} ({{module.idsemestre}}) Gr:</li><strong>
+				{% endif %}
 			{% endfor %}
-		</ol>		
+		</ol>
+			
+  
 		  
 
-																					</br>
-																				</br>
-																			</br>
-																		</br>
-																	</br>
 																</br>
 															</br>
 														</br>

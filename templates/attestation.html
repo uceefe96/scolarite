@@ -34,7 +34,7 @@
 		<p>																				</p></br>
 		<center><p>Fait le: {{ date }}</p>
 		<p>Cachet</p>
-		<img src="media/cachet1.png" width="60" height="60"></center>
+		{% comment %} <img src="media/cachet1.png" width="60" height="60"></center> {% endcomment %}
 		
 		{% comment %} <img src="media/qr/qr.png" alt="QR Code" width="1" height="1"> {% endcomment %}
 		<img src="{{ MEDIA_URL }}qrcode_image/{{ profile.user.username }}.png" alt="QR code">

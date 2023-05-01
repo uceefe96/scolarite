@@ -85,8 +85,9 @@ class Module(models.Model):
     module = models.CharField(max_length=45, blank=True, null=True)
     idfiliere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='idfiliere', blank=True, null=True)
     note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
-    idsemestre = models.ForeignKey('Semestre', models.DO_NOTHING, db_column='IdSemestre', blank=True, null=True)  # Field name made lowercase.
-
+    idsemestre = models.IntegerField(db_column='IdSemestre', blank=True, null=True)  # Field name made lowercase.    validation = models.CharField(max_length=45, blank=True, null=True)
+    session = models.CharField(max_length=45, blank=True, null=True)
+    validation = models.CharField(max_length=45, blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'module'
@@ -150,34 +151,4 @@ class Attestationrequest(models.Model):
         db_table = 'attestationrequest'
 
     def __str__(self):
-        return f"{self.date_request}  {self.user.profile.cne}  {self.user.profile.nom}  {self.user.profile.prenom}  {self.user.profile.filiere}  {self.attestation.attestation if self.attestation else ''}"
-
-
-
-
-
-# class Note(models.Model):
-#     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-#     module = models.ForeignKey(Module, on_delete=models.CASCADE)
-#     note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
-
-#     class Meta:
-#         unique_together = ('profile', 'module')
-
-# class Note(models.Model):
-#     idnote = models.AutoField(primary_key=True)
-#     user = models.ForeignKey(User, models.DO_NOTHING, blank=True, null=True)
-#     module = models.ForeignKey(Module, models.DO_NOTHING, db_column='module', blank=True, null=True)
-#     note = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
-
-#     class Meta:
-#         filiere = models.ForeignKey(Filiere, models.DO_NOTHING, db_column='filiere', blank=True, null=True)
-#         profileimg = models.TextField(blank=True, null=True)
-#         user = models.ForeignKey(User, models.DO_NOTHING, blank=True, null=True)
-
-#     class Meta:
-#         managed = False
-#         db_table = 'profile'        
-
-
-
+        return f"{self.user.profile.cne} | {self.user.profile.nom} | {self.user.profile.prenom} | {self.user.profile.filiere} | {self.attestation.attestation if self.attestation else ''} | {self.date_request}  "
