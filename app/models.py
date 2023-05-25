@@ -6,10 +6,6 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 
-
-
-
-
 class Handicap(models.Model):
     idhandicap = models.AutoField(db_column='idHandicap', primary_key=True)  # Field name made lowercase.
     handicap = models.CharField(db_column='Handicap', max_length=45, blank=True, null=True)  # Field name made lowercase.

@@ -88,12 +88,7 @@ pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'scolarite',
-        'USER': 'root',
-        'PASSWORD': 't-r7zraL8EAq;%9',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        
     }
 }
 

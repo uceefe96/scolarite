@@ -124,7 +124,7 @@ def attestationscolarite(request):
     Attestationrequest.objects.create(user=request.user)
     profile = request.user.profile
     date = datetime.now().strftime('%d-%m-%Y')
-    context = {'profile': profile, 'date': date} #, 'module': module
+    context = {'profile': profile, 'date': date} 
     template_path = 'attestation_scolarite.html'    
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="profile.pdf"'
